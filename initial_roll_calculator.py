@@ -42,10 +42,8 @@ class Character:
         self.modifier.set('0')
         self.modifier_values = [i for i in range(-5, 11)]
         self.modifier_menu = OptionMenu(root, self.modifier, *self.modifier_values)
-        self.modifier_menu.place(x=100, y=45)
+        self.modifier_menu.place(x=100, y=55)
         # advantage and disadvantage checkboxes
-        self.advantage_label = Label(root, text="     ADV", fg='black')
-        self.advantage_label.place(x=100, y=80)
         self.advantage_check_label = Label(root, text="+", fg='black', font=custom_font)
         self.advantage_check_label.place(x=132.5, y=95)
         self.advantage_check = Checkbutton(root, variable=self.advantage_state, command=self.update_advantage)
@@ -94,8 +92,7 @@ class Character:
 characters = [Character(), Character()]
 
 characters[1].tag_field.place(x=110 + 60, y=10)
-characters[1].modifier_menu.place(x=107.5 + 60, y=45)
-characters[1].advantage_label.place(x=100 + 60, y=80)
+characters[1].modifier_menu.place(x=107.5 + 60, y=55)
 characters[1].advantage_check_label.place(x=132.5 + 60, y=95)
 characters[1].advantage_check.place(x=127.5 + 60, y=115)
 characters[1].disadvantage_check_label.place(x=112.5 + 60, y=95)
@@ -181,37 +178,27 @@ def add_character():
     if len(characters) < 27:
         for i in range(0, 3):
             window_width += 60
-            sequence_field_width += 5  # increase by 5 when adding a character
+            sequence_field_width += 5
             sequence_field.config(width=sequence_field_width)
-            # create a new character object and position elements 60 units to the right
             new_character = Character()
-            new_character.tag_field.place(x=110 + len(characters) * 60, y=10)
-            new_character.modifier_menu.place(x=107.5 + len(characters) * 60, y=45)
-            new_character.advantage_label.place(x=100 + len(characters) * 60, y=80)
-            new_character.advantage_check_label.place(x=132.5 + len(characters) * 60, y=95)
-            new_character.advantage_check.place(x=127.5 + len(characters) * 60, y=115)
-            new_character.disadvantage_check_label.place(x=112.5 + len(characters) * 60, y=95)
-            new_character.disadvantage_check.place(x=107.5 + len(characters) * 60, y=115)
-            new_character.throw_menu.place(x=102.5 + len(characters) * 60, y=150)
+            x_offset = len(characters) * 60
+
+            # Consistent relative positioning
+            new_character.tag_field.place(x=110 + x_offset, y=10)
+            new_character.modifier_menu.place(x=100 + x_offset, y=55)
+            new_character.advantage_check_label.place(x=132.5 + x_offset, y=95)
+            new_character.advantage_check.place(x=127.5 + x_offset, y=115)
+            new_character.disadvantage_check_label.place(x=112.5 + x_offset, y=95)
+            new_character.disadvantage_check.place(x=107.5 + x_offset, y=115)
+            new_character.throw_menu.place(x=100 + x_offset, y=150)
+
             characters.append(new_character)
 
-    elif len(characters) >= 27 and len(characters) < 29:
-        window_width += 60
-        sequence_field_width += 5
-        sequence_field.config(width=sequence_field_width)
-        new_character = Character()
-        new_character.tag_field.place(x=110 + len(characters) * 60, y=10)
-        new_character.modifier_menu.place(x=107.5 + len(characters) * 60, y=45)
-        new_character.advantage_label.place(x=100 + len(characters) * 60, y=80)
-        new_character.advantage_check_label.place(x=132.5 + len(characters) * 60, y=95)
-        new_character.advantage_check.place(x=127.5 + len(characters) * 60, y=115)
-        new_character.disadvantage_check_label.place(x=112.5 + len(characters) * 60, y=95)
-        new_character.disadvantage_check.place(x=107.5 + len(characters) * 60, y=115)
-        new_character.throw_menu.place(x=102.5 + len(characters) * 60, y=150)
-        characters.append(new_character)
-            
+    else:
+        print("Maximum number of characters reached.")
+
     position_characters()
-    print("Characters: ", len(characters))   
+    print("Characters: ", len(characters))
     center_window(window_width, window_height)
 
 def remove_character():
@@ -223,7 +210,6 @@ def remove_character():
         # remove the latest Character object and adjust positions
         characters[-1].tag_field.place_forget()
         characters[-1].modifier_menu.place_forget()
-        characters[-1].advantage_label.place_forget()
         characters[-1].advantage_check_label.place_forget()
         characters[-1].advantage_check.place_forget()
         characters[-1].disadvantage_check_label.place_forget()
@@ -239,29 +225,32 @@ def remove_character():
 
 def reset():
     for character in characters:
-        #character.tag_field.delete(0, tk.END)
-        #character.modifier.set('0')
+        character.tag_field.delete(0, tk.END)
+        character.modifier.set('0')
         character.throw.set('0')
-        #character.advantage = False
-        #character.disadvantage = False
-        #character.advantage_check.deselect()
-        #character.disadvantage_check.deselect()
+        character.advantage = False
+        character.disadvantage = False
+        character.advantage_check.deselect()
+        character.disadvantage_check.deselect()
         sequence_field.delete(0, tk.END)
         sequence.clear()
     print("Reset done for all characters!")
 
     
 # global labels, buttons, and input field in the GUI
-tag_label = tk.Label(root, text="      TAG     ", fg='black')
+tag_label = tk.Label(root, text="Name", fg='black')
 tag_label.place(x=5, y=15)
 
-modifier_label = tk.Label(root, text="      MOD     ", fg='black')
-modifier_label.place(x=5, y=50)
+modifier_label = tk.Label(root, text="Modifier", fg='black')
+modifier_label.place(x=5, y=60)
 
-throw_label = tk.Label(root, text="     THROW    ", fg='black')
+modifier_label = tk.Label(root, text="Disadvantage -\nAdvantage +", fg='black')
+modifier_label.place(x=5, y=100)
+
+throw_label = tk.Label(root, text="Throw values", fg='black')
 throw_label.place(x=2.5, y=157.5)
 
-roll_button = Button(root, text = "     ROLL     ", command=roll)
+roll_button = Button(root, text = "   Roll d20   ", command=roll)
 roll_button.place(x = 2.5, y = 205)
 
 add_button = Button(root, text = "      ADD     ", command=add_character)
