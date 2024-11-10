@@ -17,8 +17,8 @@
 	2. Set the modifier for each character using the dropdown menu.
 	3. Check the advantage (+) or disadvantage (-) box if applicable.
 	4. Click "Roll d20" to determine the initiative order. The program will only roll for results that would yield a value
- 	of 0, allowing you to optionally roll with real dice. Set the result of dice rolls using the "Throw values"
-  	dropdown menu before clicking "Roll d20".
+ 		of 0, allowing you to optionally roll with real dice. Set the result of dice rolls using the "Throw values"
+  		dropdown menu before clicking "Roll d20".
 	5. The final sequence will be displayed in the text field at the bottom.
 	6. Use "ADD" and "REMOVE" buttons to adjust the number of characters.
 	7. Click "Reset" to clear all rolls and prepare for a new round.
