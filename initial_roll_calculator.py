@@ -247,7 +247,7 @@ modifier_label.place(x=5, y=60)
 modifier_label = tk.Label(root, text="Disadvantage -\nAdvantage +", fg='black')
 modifier_label.place(x=5, y=100)
 
-throw_label = tk.Label(root, text="Throw values", fg='black')
+throw_label = tk.Label(root, text="Throw value", fg='black')
 throw_label.place(x=2.5, y=157.5)
 
 roll_button = Button(root, text = "   Roll d20   ", command=roll)
