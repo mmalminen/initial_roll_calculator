@@ -1,6 +1,6 @@
 # Initiative Roller
 
-	A simple GUI application for tracking initiative in tabletop role-playing games, built with Python and Tkinter.
+	A simple GUI application for tracking turn sequence in tabletop role-playing games, built with Python and Tkinter.
 
 ## Features
 
